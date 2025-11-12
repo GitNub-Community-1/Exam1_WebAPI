@@ -36,7 +36,7 @@ public class AuthorService : IAuthorService
         return result;
     }
 
-    public async Task<Author> GetAuthorByIdAsync(int id)
+    public async Task<Author?> GetAuthorByIdAsync(int id)
     {
         using var conn = _conn.GetConnect();
         string query = "select * from authors where id = @id";

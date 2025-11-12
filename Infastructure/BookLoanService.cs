@@ -3,7 +3,7 @@ using Domain;
 using Infastructure;
 using Npgsql;
 using Dapper;
-public class BookLoanService
+public class BookLoanService : IBookLoanService
 {
      DbContext _conn;
     public BookLoanService()
@@ -33,7 +33,7 @@ public class BookLoanService
         return result;
     }
 
-    public async Task<BookLoan> GetBookLoanByIdAsync(int id)
+    public async Task<BookLoan?> GetBookLoanByIdAsync(int id)
     {
         using var conn = _conn.GetConnect();
         string query = "select * from bookloans where id = @id";

@@ -30,19 +30,19 @@ public class BookService : IBookService
         }
     
 
-    public async Task<Book> GetBookByIdAsync(int id)
+    public async Task<Book?> GetBookByIdAsync(int id)
     {
         using var conn = _conn.GetConnect();
-        string query = "select * from bookloans where id = @id";
-        var result = (await conn.QueryAsync<Book>(query,new{id})).ToList();
+        string query = "select * from books where id = @id";
+        var result = (await conn.QueryFirstOrDefaultAsync<Book>(query,new{id}));
         return result;
     }
 
     public async Task<List<Book>> GetBooksAsync()
     {
         using var conn = _conn.GetConnect();
-        string query = "select * from bookloans where id = @id";
-        var result = (await conn.QueryFirstOrDefaultAsync<Book>(query));
+        string query = "select * from books";
+        var result = (await conn.QueryAsync<Book>(query)).ToList(); 
         return result;
     }
 
